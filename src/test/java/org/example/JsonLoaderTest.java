@@ -3,6 +3,7 @@ package org.example;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.dto.Page;
 import org.example.dto.PageInfo;
+import org.example.dto.Post;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,7 +18,7 @@ public class JsonLoaderTest {
     public void loadPageInfo() {
         ObjectMapper mapper = new ObjectMapper();
         PageInfo pageInfo = null;
-        PageInfo pageInfo1 = new PageInfo("aa", "bb");
+
         try {
             pageInfo = mapper.readValue(this.getClass().getClassLoader().getResource("pageInfo.json"), PageInfo.class);
         } catch (IOException e) {
@@ -25,6 +26,20 @@ public class JsonLoaderTest {
         };
 
         assertNotNull(pageInfo);
+    }
+
+    @Test
+    public void loadPost() {
+        ObjectMapper mapper = new ObjectMapper();
+        Post post = null;
+
+        try {
+            post = mapper.readValue(this.getClass().getClassLoader().getResource("post.json"), Post.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        };
+
+        assertNotNull(post);
     }
 
     @Test

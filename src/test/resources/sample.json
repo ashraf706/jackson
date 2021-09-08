@@ -10,8 +10,18 @@
       "picOfPersonWhoPosted": "http://example.com/photo.jpg",
       "nameOfPersonWhoPosted": "Jane Doe",
       "message": "Sounds cool. Can't wait to see it!",
-      "likesCount": "2",
-      "comments": [],
+      "likesCount": 2,
+      "comments": ["first comment", "second comment"],
+      "timeOfPost": "1234567890"
+    },
+    {
+      "post_id": "999456789012_123456789012",
+      "actor_id": "9994567890",
+      "picOfPersonWhoPosted": "http://example.com/photo.jpg",
+      "nameOfPersonWhoPosted": "Jane Doe",
+      "message": "Sounds cool. Can't wait to see it!",
+      "likesCount": 2,
+      "comments": ["third comment", "fourth comment"],
       "timeOfPost": "1234567890"
     }
   ]
