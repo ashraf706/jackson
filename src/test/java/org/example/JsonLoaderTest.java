@@ -1,15 +1,17 @@
 package org.example;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.dto.Page;
-import org.example.dto.PageInfo;
-import org.example.dto.Post;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.datatype.jsr310.*;
+import junit.framework.*;
+import org.example.dto.*;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.*;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 public class JsonLoaderTest {
@@ -60,5 +62,26 @@ public class JsonLoaderTest {
     public void fileFromResourceFolder() {
         URL sampleFile = this.getClass().getClassLoader().getResource("sample.json");
         assertNotNull(sampleFile);
+    }
+
+
+    @Test
+    public void dateTest() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+        URL resource = this.getClass().getClassLoader().getResource("itinerary.json");
+        Itinerary itinerary = null;
+        try {
+            itinerary = mapper.readValue(resource, Itinerary.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertNotNull(itinerary);
+
+        LocalDate date = LocalDate.of(2019, 10, 21);
+        assertEquals(date, itinerary.getJourneyDate());
     }
 }
